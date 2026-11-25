@@ -1,0 +1,18 @@
+generator client {
+  provider = "prisma-client-js"
+}
+
+datasource db {
+  provider = "postgresql"
+  url      = env("DATABASE_URL")
+}
+
+model Transcription {
+  id              String   @id @default(uuid())
+  title           String   @default("Untitled Recording")
+  content         String   @db.Text
+  languages       String[] @default(["hi", "en"])
+  durationSeconds Int?
+  createdAt       DateTime @default(now())
+  updatedAt       DateTime @updatedAt
+}
